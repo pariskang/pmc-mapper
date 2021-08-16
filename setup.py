@@ -6,9 +6,9 @@ import os
 from setuptools import setup
 
 # Package meta-data.
-NAME = 'pubmed_central_mapper'
+NAME = 'pmc_mapper'
 DESCRIPTION = 'A Python Library that map PubMed Central XML to Python object'
-URL = 'https://github.com/soultoolman/pubmed-central-mapper'
+URL = 'https://github.com/soultoolman/pmc-mapper'
 EMAIL = 'soultoolman@gmail.com'
 AUTHOR = 'soultoolman'
 REQUIRES_PYTHON = '>=3.6.0'
@@ -16,10 +16,10 @@ VERSION = '1.0.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
+    'lxml',
     'click',
     'requests',
-    'humanize',
-    'sqlalchemy',
+    'rich',
 ]
 
 # What packages are optional?
@@ -35,6 +35,7 @@ TESTS_REQUIRE = [
 
 # console scripts
 CONSOLE_SCRIPTS = [
+    'pmc-mapper=pmc_mapper:main'
 ]
 
 # The rest you shouldn't have to touch too much :)
@@ -74,7 +75,7 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['pubmed_central_mapper'],
+    py_modules=['pmc_mapper'],
 
     entry_points={
         'console_scripts': CONSOLE_SCRIPTS
