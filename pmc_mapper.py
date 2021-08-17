@@ -8,7 +8,7 @@ import json
 import logging
 from os import scandir
 from datetime import date, datetime
-from os.path import isdir, join, exists
+from os.path import isdir, exists
 
 import click
 import requests
@@ -224,7 +224,7 @@ class Journal(object):
         issns = [
             Issn.from_dict(issn_dct) for issn_dct in dct['issns']
         ]
-        publisher = Publisher.from_dict(dct['publisher'])
+        publisher = Publisher.from_dict(dct['publisher']) if dct['publisher'] else None
         return cls(
             ids=ids,
             title=title,
@@ -528,7 +528,7 @@ class Article(object):
 
     @classmethod
     def from_file(cls, file):
-        with open(file) as fp:
+        with open(file, 'rb') as fp:
             string = fp.read()
         return cls.from_element(cls.get_element_from_string(
             string
