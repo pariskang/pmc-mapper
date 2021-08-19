@@ -263,9 +263,11 @@ class AffParser(BaseParser):
             element = self.get_first(self.element.xpath('./label'), None)  # noqa
             title = self.element.text if element is None else element.tail
         else:
-            prefix = self.get_first(element.xpath('./institution/text()'))  # noqa
-            suffix = element.tail.rstrip()  # noqa
-            title = prefix + suffix
+            title = self.get_first(element.xpath('./institution/text()'))  # noqa
+            suffix = element.tail  # noqa
+            if suffix is not None:
+                suffix = suffix.rstrip()
+                title = title + suffix
         return Aff(title=title)
 
 
