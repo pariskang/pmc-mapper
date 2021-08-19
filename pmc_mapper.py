@@ -521,10 +521,11 @@ class Article(object):
 
     @classmethod
     def get_element_from_string(cls, string):
-        return remove_namespace(etree.fromstring(
+        element = remove_namespace(etree.fromstring(
             string,
             parser=etree.XMLParser(huge_tree=True)
         ))
+        return element.xpath('./article')[0] if element.tag == 'pmc-articleset' else element
 
     @classmethod
     def from_file(cls, file):
