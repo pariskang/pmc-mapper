@@ -16,7 +16,7 @@ from lxml import etree
 from rich.progress import track
 
 
-logger = logging.getLogger('pubmed-central-mapper')
+logger = logging.getLogger('pmc-mapper')
 
 DATE_FMT = '%Y-%m-%d'
 
@@ -255,8 +255,17 @@ class ArticleId(Id):
 
 class AffParser(BaseParser):
     def parse(self):
-        element = self.get_first(self.element.xpath('./label'), None)  # noqa
-        title = self.element.text if element is None else element.tail
+        element = self.get_first(
+            self.element.xpath('./institution-wrap'),
+            None  # noqa
+        )
+        if element is None:
+            element = self.get_first(self.element.xpath('./label'), None)  # noqa
+            title = self.element.text if element is None else element.tail
+        else:
+            prefix = self.get_first(element.xpath('./institution/text()'))  # noqa
+            suffix = element.tail.rstrip()  # noqa
+            title = prefix + suffix
         return Aff(title=title)
 
 
@@ -298,8 +307,8 @@ class AuthorParser(BaseParser):
         for rid in self.element.xpath(
             './xref/@rid'
         ):
-            if rid in affs:
-                affs.append(affs[rid])
+            if rid in self.affs:
+                affs.append(self.affs[rid])
         email = self.get_first(
             self.element.xpath('./email/text()'), None  # noqa
         )
@@ -416,7 +425,7 @@ class ArticleParser(BaseParser):
             element.get('id'): AffParser(
                 element
             ).parse() for element in self.element.xpath(
-                './front/article-meta/aff'
+                './front/article-meta/contrib-group/aff'
             )
         }
         authors = []

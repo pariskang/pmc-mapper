@@ -12,7 +12,7 @@ URL = 'https://github.com/soultoolman/pmc-mapper'
 EMAIL = 'soultoolman@gmail.com'
 AUTHOR = 'soultoolman'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
