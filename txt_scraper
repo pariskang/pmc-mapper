@@ -1,0 +1,19 @@
+#pip install pubmed-mapper
+from pubmed_mapper import Article
+
+import time
+f = open("/content/url3.txt",encoding='utf-8')   #upload u own file to extract numourous pubmed data
+while True:
+    line = f.readline()
+    if line:
+        i = line.replace("\n","")
+        j = i.replace("'","")
+        #print (line.replace("\n",""))
+        article = Article.parse_pmid(j)
+        #article = Article.parse_pmid(line.replace("\n",""))
+        #article = Article.parse_pmid(line)
+        print(j,article.pubdate)
+        time.sleep(1)
+    else:
+        break
+f.close()
