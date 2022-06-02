@@ -1,5 +1,5 @@
 # pmc-mapper
-Thanks for prior author's great contribution for this work. I only debug for prior version error when facing special pmid cannot extract publish date.
+Thanks for prior author's great contribution for this work. I only debug for prior version error when facing special pmid cannot extract publish date. Also, u can folk txt_scraper to extract numerous pmid data.
 
 A Python Library that map PubMed Central XML to Python object.
 
