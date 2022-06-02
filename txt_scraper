@@ -2,7 +2,7 @@
 from pubmed_mapper import Article
 
 import time
-f = open("/content/url3.txt",encoding='utf-8')   #upload u own file to extract numourous pubmed data
+f = open("/content/url3.txt",encoding='utf-8')   #upload u own file to extract numerous pubmed data
 while True:
     line = f.readline()
     if line:
